@@ -1,0 +1,26 @@
+<ion-menu [content]="mycontent">
+  <ion-content>
+    <ion-list class="head">
+      <h4>Land Manager</h4>
+    </ion-list>
+    <ion-list class="link">
+      <span>
+        <ion-icon ios="ios-home" md="md-home"></ion-icon>&nbsp;&nbsp; Home</span>
+    </ion-list>
+    <hr>
+
+    <ion-list class="link">
+      <span>
+        <ion-icon name="logo-usd"></ion-icon>&nbsp;&nbsp; Bill Payments</span>
+    </ion-list>
+    <hr>
+
+    <ion-list class="link">
+      <span>
+        <ion-icon name="settings"></ion-icon>&nbsp;&nbsp; Settings</span>
+    </ion-list>
+    <hr>
+  </ion-content>
+</ion-menu>
+
+<ion-nav #mycontent [root]="rootPage"></ion-nav>

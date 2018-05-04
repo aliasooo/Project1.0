@@ -1,0 +1,38 @@
+ion-header {
+  font-family: 'Raleway', sans-serif !important;
+  ion-navbar {
+    padding: 1em !important;
+  }
+}
+
+ion-card {
+  padding: 1em;
+}
+
+.main {
+  background: #e4e2e2;
+}
+
+.toolbar-background {
+  background: #001e52;
+}
+
+.toolbar-title {
+  color: white;
+}
+
+.bar-buttons {
+  color: white;
+  margin-right: 1rem;
+}
+
+.icon-center {
+  display: block;
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: .5rem;
+}
+
+.t-a-c {
+  text-align: center;
+}

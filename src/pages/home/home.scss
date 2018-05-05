@@ -9,21 +9,18 @@ ion-card {
   padding: 1em;
 }
 
-.main {
-  background: #e4e2e2;
-}
-
 .toolbar-background {
   background: #001e52;
 }
 
 .toolbar-title {
   color: white;
+  text-align: center;
+  font-size: 2.5rem;
 }
 
 .bar-buttons {
   color: white;
-  margin-right: 1rem;
 }
 
 .icon-center {
@@ -35,4 +32,17 @@ ion-card {
 
 .t-a-c {
   text-align: center;
+}
+.text-center{
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  text-align: center;
+
+  transform: translate(-50%, -50%);
+  color: white;
+}
+.fill{
+  height: 100vh;
+  width: 100vw;
 }

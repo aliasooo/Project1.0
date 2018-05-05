@@ -1,0 +1,58 @@
+.main-icon {
+  font-size: 7em !important;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.ion-page.show-page {
+  background-image: -webkit-gradient(radial, center center, 0, center center, 286, color-stop(0, #C8E0DD), color-stop(100, #0A224C));
+  background-image: -webkit-radial-gradient(center, ellipse farthest-corner, #C8E0DD 0%, #0A224C 100%);
+  background-image: -webkit-radial-gradient(ellipse farthest-corner at center, #C8E0DD 0%, #0A224C 100%);
+  background-image: radial-gradient(ellipse farthest-corner at center, #C8E0DD 0%, #0A224C 100%);
+}
+
+.icon-wrapper {
+  height: 50vh;
+  position: relative;
+}
+
+.icon-center {
+  display: block;
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: .5rem;
+}
+
+.cards {
+  font-family: 'Raleway', sans-serif !important;
+  top: 15%;
+  position: relative;
+}
+
+.f-r {
+  float: right;
+}
+
+.content-center {
+  text-align: center;
+  font-size: 1.5em;
+  color: forestgreen;
+}
+
+.card {
+  h3 {
+    margin-top: 1.6rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.alert-wrapper {
+  font-family: 'Raleway', sans-serif !important;
+}
+
+.back-button {
+  color: forestgreen !important;
+}

@@ -1,13 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
-
-/**
- * Generated class for the MainPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { BillPaymentsPage } from '../bill-payments/bill-payments';
+import { SearchMuseumPage } from '../search-museum/search-museum';
 
 @IonicPage()
 @Component({
@@ -15,12 +10,11 @@ import { HomePage } from '../home/home';
   templateUrl: 'main.html',
 })
 export class MainPage {
-  private rootPage;
-  private homePage;
-
+  public rootPage;
+  public billPayments = BillPaymentsPage;
+  public search = SearchMuseumPage;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.rootPage = HomePage;
-    this.homePage = HomePage;
   }
 
   ionViewDidLoad() {
@@ -28,7 +22,7 @@ export class MainPage {
   }
 
   openPage(p) {
-    this.rootPage = p;
+    this.navCtrl.push(p);
   }
 
 }

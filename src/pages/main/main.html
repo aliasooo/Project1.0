@@ -5,13 +5,22 @@
     </ion-list>
     <ion-list class="link">
       <span>
-        <ion-icon ios="ios-home" md="md-home"></ion-icon>&nbsp;&nbsp; Home</span>
+        <ion-icon ios="ios-home" md="md-home"></ion-icon>&nbsp;&nbsp; My Stands</span>
     </ion-list>
     <hr>
 
     <ion-list class="link">
-      <span>
+      <span (click)="openPage(billPayments)">
+
         <ion-icon name="logo-usd"></ion-icon>&nbsp;&nbsp; Bill Payments</span>
+    </ion-list>
+    <hr>
+
+    <ion-list class="link">
+<span (click)="openPage(search)">
+
+
+        <ion-icon name="navigate"></ion-icon>&nbsp;&nbsp; View Available Stands</span>
     </ion-list>
     <hr>
 
@@ -20,6 +29,7 @@
         <ion-icon name="settings"></ion-icon>&nbsp;&nbsp; Settings</span>
     </ion-list>
     <hr>
+
   </ion-content>
 </ion-menu>
 

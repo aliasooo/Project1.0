@@ -16,6 +16,7 @@ import { SearchMuseumPage } from '../pages/search-museum/search-museum';
 import { HttpModule } from '@angular/http';
 import { StandDetailsPage } from '../pages/stand-details/stand-details';
 import { AvailableStandsPage } from '../pages/available-stands/available-stands';
+import { MapViewPage } from '../pages/map-view/map-view';
 
 
 @NgModule({
@@ -26,7 +27,10 @@ import { AvailableStandsPage } from '../pages/available-stands/available-stands'
     BillPaymentsPage,
     SearchMuseumPage,
     MuseumDetailPage,
-    AllMuseumPage
+    AllMuseumPage,
+    AvailableStandsPage,
+    MapViewPage,
+    StandDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -44,7 +48,8 @@ import { AvailableStandsPage } from '../pages/available-stands/available-stands'
     MuseumDetailPage,
     AllMuseumPage,
     StandDetailsPage,
-    AvailableStandsPage
+    AvailableStandsPage,
+    MapViewPage
   ],
   providers: [
     StatusBar,

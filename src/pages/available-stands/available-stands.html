@@ -1,14 +1,28 @@
 <ion-header>
-  <ion-nav-bar>
-    <ion-title>Buy Stand</ion-title>
+  <ion-navbar>
+    <ion-title></ion-title>
     <ion-buttons end>
-      <button ion-button (click)="allStandsMap()">
-        <ion-icon ios="ios-pin" md="md-pin"></ion-icon>All Stands</button>
+      <button ion-button (click)="allStandsMap()" style="color:white">All Stands</button>
     </ion-buttons>
-  </ion-nav-bar>
+  </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-<!-- <ion-input type="text" placeholder="Search" (input)="searchStands($event)"></ion-input> -->
-<o
+  <!-- <ion-input type="text" placeholder="Search" (input)="searchStands($event)"></ion-input> -->
+  <ion-item *ngFor="let stand of standsList" (click)="itemTapped($event, stand)">
+    <span>
+      <ion-icon class="light-green " ios="ios-pin" md="md-pin"></ion-icon>{{stand.name}}
+      <p>City: {{stand.state}}</p>
+    </span>
+  </ion-item>
+
+  <ion-list *ngIf="isFiltered">
+    <ion-item *ngFor="let stand of filteredStands" (click)="itemTapped($event, stand)">
+      <span>
+        <ion-icon ios="ios-pin" md="md-pin"></ion-icon>{{stand.name}}
+        <p>City: {{stand.state}}</p>
+      </span>
+
+    </ion-item>
+  </ion-list>
 </ion-content>

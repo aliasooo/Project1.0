@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
-import { Museum } from '../../models/museum';
 import { StandDetailsPage } from '../stand-details/stand-details';
 import { MapViewPage } from '../map-view/map-view';
 
@@ -36,7 +35,7 @@ export class AvailableStandsPage {
         }
       });
       this.isFiltered = true;
-      this.filteredStands = this.filteredStands;
+      this.filteredStands = filtered;
     }
   }
 

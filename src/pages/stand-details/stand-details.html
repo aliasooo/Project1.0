@@ -1,18 +1,13 @@
-<!--
-  Generated template for the StandDetailsPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>stand-details</ion-title>
+  <ion-navbar color="primary">
+    <ion-title> {{stand.state}}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
-<ion-content padding>
-
+<ion-content>
+  <ion-card padding>
+    <h3>Museum name : {{stand.name}}</h3>
+    <p>Location : {{stand.state}}</p>
+    <div #map id="map"></div>
+  </ion-card>
 </ion-content>

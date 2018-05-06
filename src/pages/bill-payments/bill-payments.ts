@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
-import { AlertInputOptions } from 'ionic-angular/components/alert/alert-options';
 
 @Component({
   selector: 'page-bill-payments',

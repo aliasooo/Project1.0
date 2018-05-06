@@ -16,9 +16,9 @@ export class AvailableStandsPage {
   isFiltered = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpClient) {
-    this.http.get<any>('assets/data/museum.json')
+    this.http.get<any>('assets/data/stands.json')
       .subscribe(data => {
-        this.standsList = data.museums;
+        this.standsList = data.stands;
       },
         err => {
           console.log(err);

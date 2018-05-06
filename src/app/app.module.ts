@@ -10,13 +10,11 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { MainPage } from '../pages/main/main';
 import { BillPaymentsPage } from '../pages/bill-payments/bill-payments';
-import { MuseumDetailPage } from '../pages/museum-detail/museum-detail';
-import { AllMuseumPage } from '../pages/all-museum/all-museum';
-import { SearchMuseumPage } from '../pages/search-museum/search-museum';
 import { HttpModule } from '@angular/http';
 import { StandDetailsPage } from '../pages/stand-details/stand-details';
 import { AvailableStandsPage } from '../pages/available-stands/available-stands';
 import { MapViewPage } from '../pages/map-view/map-view';
+import { CurrencyPipe } from '@angular/common';
 
 
 @NgModule({
@@ -25,9 +23,6 @@ import { MapViewPage } from '../pages/map-view/map-view';
     HomePage,
     MainPage,
     BillPaymentsPage,
-    SearchMuseumPage,
-    MuseumDetailPage,
-    AllMuseumPage,
     AvailableStandsPage,
     MapViewPage,
     StandDetailsPage
@@ -44,9 +39,6 @@ import { MapViewPage } from '../pages/map-view/map-view';
     HomePage,
     MainPage,
     BillPaymentsPage,
-    SearchMuseumPage,
-    MuseumDetailPage,
-    AllMuseumPage,
     StandDetailsPage,
     AvailableStandsPage,
     MapViewPage
@@ -55,6 +47,7 @@ import { MapViewPage } from '../pages/map-view/map-view';
     StatusBar,
     SplashScreen,
     Geolocation,
+    CurrencyPipe,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

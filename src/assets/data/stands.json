@@ -1,0 +1,17 @@
+{
+  "stands": [{
+      "city": "Harare",
+      "area": "Mbare",
+      "latitude": -17.86411034,
+      "longitude": 31.04225509,
+      "price": "3000"
+    },
+    {
+      "city": "Harare",
+      "area": "Chisipite",
+      "latitude": -17.80041733,
+      "longitude": 31.12389431,
+      "price": "5000"
+    }
+  ]
+}

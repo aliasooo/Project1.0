@@ -1,13 +1,16 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title> {{stand.state}}</ion-title>
+    <ion-title> {{stand.area}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-card padding>
-    <h3>Museum name : {{stand.name}}</h3>
-    <p>Location : {{stand.state}}</p>
+    <p>Price :
+      <b style="font-size: 1.2em">{{stand.price| currency}} </b>
+    </p>
+    <p>Location : {{stand.city}}</p>
+    <button ion-button block>Buy</button>
     <div #map id="map"></div>
   </ion-card>
 </ion-content>

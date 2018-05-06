@@ -11,16 +11,21 @@
   <!-- <ion-input type="text" placeholder="Search" (input)="searchStands($event)"></ion-input> -->
   <ion-item *ngFor="let stand of standsList" (click)="itemTapped($event, stand)">
     <span>
-      <ion-icon class="light-green " ios="ios-pin" md="md-pin"></ion-icon>{{stand.name}}
-      <p>City: {{stand.state}}</p>
+      <ion-icon class="light-green " ios="ios-pin" md="md-pin"></ion-icon>&nbsp;&nbsp;{{stand.area}}
+      <div class="indent-left">
+        <p>City: {{stand.city}}</p>
+        <p>Price:
+          <b style="font-size: 1.2em">{{stand.price | currency}}</b>
+        </p>
+      </div>
     </span>
   </ion-item>
 
   <ion-list *ngIf="isFiltered">
     <ion-item *ngFor="let stand of filteredStands" (click)="itemTapped($event, stand)">
       <span>
-        <ion-icon ios="ios-pin" md="md-pin"></ion-icon>{{stand.name}}
-        <p>City: {{stand.state}}</p>
+        <ion-icon ios="ios-pin" md="md-pin"></ion-icon>{{stand.area}}
+        <p>City: {{stand.city}}</p>
       </span>
 
     </ion-item>

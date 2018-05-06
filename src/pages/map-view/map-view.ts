@@ -15,7 +15,7 @@ export class MapViewPage {
   standList = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation) {
-    this.standList = navParams.get('standList');
+    this.standList = navParams.get('standsList');
   }
 
   ionViewDidLoad() {
@@ -24,12 +24,12 @@ export class MapViewPage {
   }
 
   displayGoogleMap() {
-    let latLng = new google.maps.LatLng(28.6117993, 77.2194934);
+    let latLng = new google.maps.LatLng(-17.86411034, 31.04225509);
 
     let mapOptions = {
       center: latLng,
       disableDefaultUI: true,
-      zoom: 4,
+      zoom: 10,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
     this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
@@ -37,15 +37,14 @@ export class MapViewPage {
 
   getMarkers() {
     for (let _i = 0; _i < this.standList.length; _i++) {
-      if (_i > 0)
-        this.addMarkersToMap(this.standList[_i]);
+      this.addMarkersToMap(this.standList[_i]);
     }
   }
 
-  addMarkersToMap(museum) {
-    var position = new google.maps.LatLng(museum.latitude, museum.longitude);
-    var museumMarker = new google.maps.Marker({ position: position, title: museum.name });
-    museumMarker.setMap(this.map);
+  addMarkersToMap(stand) {
+    var position = new google.maps.LatLng(stand.latitude, stand.longitude);
+    var standMarker = new google.maps.Marker({ position: position, title: stand.area });
+    standMarker.setMap(this.map);
   }
 
 }

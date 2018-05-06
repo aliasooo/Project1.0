@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { BillPaymentsPage } from '../bill-payments/bill-payments';
-import { SearchMuseumPage } from '../search-museum/search-museum';
 import { AvailableStandsPage } from '../available-stands/available-stands';
 
 @IonicPage()
@@ -13,7 +12,6 @@ import { AvailableStandsPage } from '../available-stands/available-stands';
 export class MainPage {
   public rootPage;
   public billPayments = BillPaymentsPage;
-  public search = SearchMuseumPage;
   public stands = AvailableStandsPage;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.rootPage = HomePage;

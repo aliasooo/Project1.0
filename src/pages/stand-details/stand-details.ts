@@ -1,7 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Museum } from '../../models/museum';
 import { Geolocation } from '@ionic-native/geolocation';
+import { Stands } from '../../models/stands';
 
 declare var google;
 
@@ -13,7 +13,7 @@ declare var google;
 export class StandDetailsPage {
   @ViewChild('map') mapContainer: ElementRef;
   public map: any;
-  stand = {} as Museum;
+  stand = {} as Stands;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation) {
     this.stand = navParams.get('stand');
@@ -37,7 +37,7 @@ export class StandDetailsPage {
       animation: google.maps.Animation.DROP,
       position: latLng
     });
-    this.addInfoWindow(marker, this.stand.name + this.stand.state);
+    this.addInfoWindow(marker, this.stand.area + this.stand.city);
   }
 
   addInfoWindow(marker, content) {

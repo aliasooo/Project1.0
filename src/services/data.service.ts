@@ -10,9 +10,13 @@ export class DataService {
   userId: string;
 
   constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth) {
-   this.userStands = db.list('/stands');
     afAuth.authState.subscribe(user => {
-      if (user) this.userId = user.uid
+      if (user) {
+        //add loader
+        this.userId = user.uid;
+        this.userStands = this.db.list(`items/${this.userId}`);
+
+      }
     });
   }
 

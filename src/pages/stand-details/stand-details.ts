@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Stands } from '../../models/stands';
+import { DataService } from '../../services/data.service';
 
 declare var google;
 
@@ -10,12 +11,13 @@ declare var google;
   selector: 'page-stand-details',
   templateUrl: 'stand-details.html',
 })
+
 export class StandDetailsPage {
   @ViewChild('map') mapContainer: ElementRef;
   public map: any;
   stand = {} as Stands;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation) {
+  constructor(private dataService: DataService, public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation) {
     this.stand = navParams.get('stand');
   }
 
@@ -48,4 +50,10 @@ export class StandDetailsPage {
       infoWindow.open(this.map, marker);
     });
   }
+
+  onSubmit() {
+    console.log(this.stand);
+     this.dataService.addStand(this.stand);
+  }
+
 }

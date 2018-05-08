@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import * as firebase from 'firebase';
 import { MainPage } from '../pages/main/main';
+import { LoginPage } from '../pages/login/login';
 
 const config = {
   apiKey: "AIzaSyAwp7I3aM5ENEu1gITU_yUk6oNwLTHmAvQ",
@@ -20,7 +21,7 @@ const config = {
 })
 
 export class MyApp {
-  rootPage: any = MainPage;
+  rootPage: any = LoginPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
@@ -29,6 +30,6 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
-    firebase.initializeApp(config);
+    // firebase.initializeApp(config);
   }
 }

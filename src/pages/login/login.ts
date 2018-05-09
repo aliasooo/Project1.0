@@ -18,7 +18,6 @@ export class LoginPage {
   }
 
   async login(user: User) {
-    console.log(user);
 
     try {
       const result = this.angularAuth.auth.signInWithEmailAndPassword(user.email, user.password);

@@ -20,6 +20,7 @@ import { LoginPage } from '../pages/login/login';
 import { AngularFireAuthModule } from "angularfire2/auth";
 import { DataService } from '../services/data.service';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { MyStandsPage } from '../pages/my-stands/my-stands';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
     AvailableStandsPage,
     MapViewPage,
     StandDetailsPage,
-    LoginPage
+    LoginPage,
+    MyStandsPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
     StandDetailsPage,
     AvailableStandsPage,
     MapViewPage,
-    LoginPage
+    LoginPage,
+    MyStandsPage
   ],
   providers: [
     StatusBar,

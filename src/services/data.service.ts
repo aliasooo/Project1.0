@@ -6,7 +6,7 @@ import { Stands } from "../models/stands";
 
 @Injectable()
 export class DataService {
-  userStands: AngularFireList<Stands[]>;
+  userStands: AngularFireList<Stands>;
   userId: string;
 
   constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth) {
@@ -14,19 +14,20 @@ export class DataService {
       if (user) {
         //add loader
         this.userId = user.uid;
-        this.userStands = this.db.list(`items/${this.userId}`);
-
+        this.userStands = this.db.list(`stands/${this.userId}`);
       }
     });
   }
 
-  getUserStands(): AngularFireList<Stands[]> {
+  getUserStands(): AngularFireList<Stands> {
+    console.log(this.userId);
+
     if (!this.userId) return;
-    this.userStands = this.db.list(`items/${this.userId}`);
-    return this.userStands;
+     return this.userStands;
   }
 
-  addStand(stand) {
+  addStand(stand: Stands) {
+    console.log('stand', stand);
     this.userStands.push(stand);
   }
 }

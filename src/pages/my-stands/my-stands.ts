@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { DataService } from '../../services/data.service';
+import { StandDetailsPage } from '../stand-details/stand-details';
+import { BillPaymentsPage } from '../bill-payments/bill-payments';
 
 @IonicPage()
 @Component({
@@ -36,6 +38,16 @@ export class MyStandsPage {
 
         })
 
+  }
+
+  itemTapped(event, stand) {
+    this.navCtrl.push(StandDetailsPage, {
+      stand: stand
+    });
+  }
+
+  payBills() {
+    this.navCtrl.push(BillPaymentsPage);
   }
 
 }

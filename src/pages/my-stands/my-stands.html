@@ -14,23 +14,28 @@
 
 
 <ion-content padding>
-  <ion-list inset>
-    <ion-item *ngFor="let item of myStands">
-      <ion-icon name="compass" item-start></ion-icon>
-      {{ item.area }} {{ item.city }}
-      <ion-badge item-end>owned</ion-badge>
-    </ion-item>
-  </ion-list>
+  <button ion-button full (click)="payBills()">Pay Bills</button>
 
+  <ion-item *ngFor="let item of myStands">
+    <ion-card>
 
-  <!-- <ion-list inset>
-    <button ion-item *ngFor="let item of myStands">
-      <p>Area:
-        <b>{{ item.area }}</b>
-      </p>
-      <p>City:
-        <b>{{ item.city }}</b>
-      </p>
-    </button>
-  </ion-list> -->
+      <img src="../../assets/imgs/stand.jpg">
+
+      <ion-item>
+        <ion-icon name="pin" item-start large></ion-icon>
+        <h2>{{item.area}}</h2>
+        <p>{{ item.city }}</p>
+      </ion-item>
+
+      <ion-item>
+        <p item-left>{{ item.status }}</p>
+        <button ion-button icon-left clear item-end (click)="itemTapped($event, item)">
+          <ion-icon name="navigate"></ion-icon>
+          Locate
+        </button>
+      </ion-item>
+
+    </ion-card>
+  </ion-item>
+
 </ion-content>

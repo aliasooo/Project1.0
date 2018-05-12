@@ -6,11 +6,11 @@
 
 <ion-content>
   <ion-card padding>
-    <p>Price :
+    <p>Value :
       <b style="font-size: 1.2em">{{stand.price| currency}} </b>
     </p>
     <p>Location : {{stand.city}}</p>
-    <button ion-button block (click)="onSubmit()">Apply</button>
+    <button ion-button block (click)="onSubmit()" *ngIf="!stand.status">Apply</button>
     <div #map id="map"></div>
   </ion-card>
 </ion-content>

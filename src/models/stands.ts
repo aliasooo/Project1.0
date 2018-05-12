@@ -4,4 +4,5 @@ export interface Stands {
   latitude: any;
   longitude: any;
   price: number;
+  status: string;
 }

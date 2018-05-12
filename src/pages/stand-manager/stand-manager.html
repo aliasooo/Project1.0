@@ -8,7 +8,7 @@
 
   <ion-navbar>
     <ion-title>stand-manager</ion-title>
-    <ion-buttons end>
+    <ion-buttons end *ngIf="isEdit || isManage">
       <button ion-button (click)="isEdit = false;isManage=false;" style="color:white">Close</button>
     </ion-buttons>
 
@@ -17,17 +17,18 @@
 </ion-header>
 
 
-<ion-content padding *ngIf="!isEdit || !isManage">
+<ion-content padding>
 
   <ion-fab right bottom>
-    <button ion-fab (click)="isEdit = true">
+    <button ion-fab (click)="isEdit = true; isManage = false">
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
 
-  <ion-item-group>
-    <ion-item-divider color="light">Stand Areas</ion-item-divider>
-    <ion-item *ngFor="let item of availableStands;" (click)="isManage = true;getApplicants(item)">{{item.area}}</ion-item>
+  <ion-item-group *ngIf="!isEdit && !isManage">
+
+    <ion-item-divider color="light" text-center>Stand Areas</ion-item-divider>
+    <ion-item *ngFor="let item of availableStands;" (click)="getApplicants(item.area)">{{item.area}}</ion-item>
   </ion-item-group>
 </ion-content>
 
@@ -61,6 +62,13 @@
   <button ion-button margin-top (click)="addNew()" color="dark-blue">Add</button>
 </ion-content>
 
-<ion-content *ngIf="isManage">
-  Hello
+<ion-content padding *ngIf="isManage" style="margin-top: 5rem;">
+  <ion-list *ngFor="let applicant of applicants">
+    <ion-item>
+      <h2>{{applicant.applicant}}</h2>
+      <p>{{applicant.status}}</p>
+      <button ion-button clear item-end (click)="approve(applicant.applicant)" *ngIf="applicant.status === 'Pending'">Approve</button>
+    </ion-item>
+  </ion-list>
 </ion-content>
+

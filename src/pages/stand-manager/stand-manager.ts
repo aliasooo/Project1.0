@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { DataService } from '../../services/data.service';
 import { Stands } from '../../models/stands';
 
@@ -22,8 +22,8 @@ export class StandManagerPage {
   isEdit = false;
   isManage = false;
   applicants: any;
-
-  constructor(public loadingCtrl: LoadingController, private dataService: DataService, public navCtrl: NavController, public navParams: NavParams) {
+  selectedArea: string;
+  constructor(public alertCtrl: AlertController, public loadingCtrl: LoadingController, private dataService: DataService, public navCtrl: NavController, public navParams: NavParams) {
     this.getStands()
   }
 
@@ -51,12 +51,38 @@ export class StandManagerPage {
   }
 
   getApplicants(area) {
+    this.isManage = true;
+    this.isEdit = false;
+    this.selectedArea = area;
     this.dataService.getAreaApplicants(area)
       .valueChanges()
       .subscribe(data => {
         this.applicants = data;
-        console.log(data);
-        
       })
+  }
+
+  approve(applicant: string, ) {
+    let prompt = this.alertCtrl.create({
+      title: 'Login',
+      message: "Provide a stand number below",
+      inputs: [
+        {
+          name: 'standNumber',
+          placeholder: 'Stand Number'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel'
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            this.dataService.assignStandNumber(this.selectedArea, applicant, data);
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 }

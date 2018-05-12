@@ -15,6 +15,15 @@
 
 <ion-content padding>
   <ion-list inset>
+    <ion-item *ngFor="let item of myStands">
+      <ion-icon name="compass" item-start></ion-icon>
+      {{ item.area }} {{ item.city }}
+      <ion-badge item-end>owned</ion-badge>
+    </ion-item>
+  </ion-list>
+
+
+  <!-- <ion-list inset>
     <button ion-item *ngFor="let item of myStands">
       <p>Area:
         <b>{{ item.area }}</b>
@@ -23,5 +32,5 @@
         <b>{{ item.city }}</b>
       </p>
     </button>
-  </ion-list>
+  </ion-list> -->
 </ion-content>

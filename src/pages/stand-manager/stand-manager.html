@@ -1,0 +1,66 @@
+<!--
+  Generated template for the StandManagerPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>stand-manager</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="isEdit = false;isManage=false;" style="color:white">Close</button>
+    </ion-buttons>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding *ngIf="!isEdit || !isManage">
+
+  <ion-fab right bottom>
+    <button ion-fab (click)="isEdit = true">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <ion-item-group>
+    <ion-item-divider color="light">Stand Areas</ion-item-divider>
+    <ion-item *ngFor="let item of availableStands;" (click)="isManage = true;getApplicants(item)">{{item.area}}</ion-item>
+  </ion-item-group>
+</ion-content>
+
+<ion-content padding *ngIf="isEdit">
+  <ion-item>
+    <ion-label fixed>City</ion-label>
+    <ion-input type="text" [(ngModel)]="newStand.city"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>City</ion-label>
+    <ion-input type="text" [(ngModel)]="newStand.city"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Area</ion-label>
+    <ion-input type="text" [(ngModel)]="newStand.area"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Price</ion-label>
+    <ion-input type="text" [(ngModel)]="newStand.price"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Longitude</ion-label>
+    <ion-input type="text" [(ngModel)]="newStand.longitude"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Latitude</ion-label>
+    <ion-input type="text" [(ngModel)]="newStand.latitude"></ion-input>
+  </ion-item>
+
+  <button ion-button margin-top (click)="addNew()" color="dark-blue">Add</button>
+</ion-content>
+
+<ion-content *ngIf="isManage">
+  Hello
+</ion-content>

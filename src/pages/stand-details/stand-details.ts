@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Stands } from '../../models/stands';
 import { DataService } from '../../services/data.service';
@@ -17,7 +17,7 @@ export class StandDetailsPage {
   public map: any;
   stand = {} as Stands;
 
-  constructor(private dataService: DataService, public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation) {
+  constructor(public alertCtrl: AlertController, private dataService: DataService, public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation) {
     this.stand = navParams.get('stand');
   }
 
@@ -52,8 +52,23 @@ export class StandDetailsPage {
   }
 
   onSubmit() {
-    console.log(this.stand);
-     this.dataService.addStand(this.stand);
+    this.dataService.addStand(this.stand)
+      .then(result => {
+        let alert = this.alertCtrl.create({
+          title: 'Success!',
+          subTitle: 'Application was successful!',
+          buttons: ['OK']
+        });
+        alert.present();
+      },
+        error => {
+          let alert = this.alertCtrl.create({
+            title: 'Error!',
+            subTitle: 'Sorry application failed!',
+            buttons: ['OK']
+          });
+          alert.present();
+        })
   }
 
 }

@@ -11,10 +11,11 @@ export class MyStandsPage {
   myStands: any;
 
   constructor(public loadingCtrl: LoadingController, private dataService: DataService, public navCtrl: NavController, public navParams: NavParams) {
+    this.getStands();
   }
 
   ionViewDidLoad() {
-    this.getStands();
+
   }
 
   getStands() {
@@ -28,7 +29,12 @@ export class MyStandsPage {
       subscribe(data => {
         this.myStands = data;
         loading.dismiss();
-      })
+      },
+        err => {
+          loading.dismiss();
+          console.log(err);
+
+        })
 
   }
 

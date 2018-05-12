@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { StandDetailsPage } from '../stand-details/stand-details';
 import { MapViewPage } from '../map-view/map-view';
+import { DataService } from '../../services/data.service';
 
 @IonicPage()
 @Component({
@@ -15,14 +16,8 @@ export class AvailableStandsPage {
   filteredStands = [];
   isFiltered = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpClient) {
-    this.http.get<any>('assets/data/stands.json')
-      .subscribe(data => {
-        this.standsList = data.stands;
-      },
-        err => {
-          console.log(err);
-        });
+  constructor(public loadingCtrl: LoadingController, private dataService: DataService, public navCtrl: NavController, public navParams: NavParams, private http: HttpClient) {
+    this.getAllStands();
   }
 
   searchStands(event) {
@@ -49,5 +44,21 @@ export class AvailableStandsPage {
     this.navCtrl.push(MapViewPage, {
       standsList: this.standsList
     });
+  }
+
+  getAllStands() {
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+    loading.present();
+    this.dataService.getNewStandsAreas()
+      .valueChanges()
+      .subscribe(data => {
+        this.standsList = data;
+        loading.dismiss();
+      },
+        err => {
+          loading.dismiss();
+        })
   }
 }

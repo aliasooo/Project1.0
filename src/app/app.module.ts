@@ -21,6 +21,7 @@ import { AngularFireAuthModule } from "angularfire2/auth";
 import { DataService } from '../services/data.service';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { MyStandsPage } from '../pages/my-stands/my-stands';
+import { StandManagerPage } from '../pages/stand-manager/stand-manager';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { MyStandsPage } from '../pages/my-stands/my-stands';
     MapViewPage,
     StandDetailsPage,
     LoginPage,
-    MyStandsPage
+    MyStandsPage,
+    StandManagerPage
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,8 @@ import { MyStandsPage } from '../pages/my-stands/my-stands';
     AvailableStandsPage,
     MapViewPage,
     LoginPage,
-    MyStandsPage
+    MyStandsPage,
+    StandManagerPage
   ],
   providers: [
     StatusBar,

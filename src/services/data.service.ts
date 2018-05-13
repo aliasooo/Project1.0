@@ -8,7 +8,7 @@ import { database } from "firebase";
 
 @Injectable()
 export class DataService {
-  userStands: AngularFireList<Stands>;
+  userStands: AngularFireList<any>;
   newStand: AngularFireList<Stands>;
   standApplications: AngularFireList<any>;
   userId: string;
@@ -27,7 +27,27 @@ export class DataService {
   }
 
   getUserStands(): AngularFireList<Stands> {
-    if (!this.userId) return;
+    // this.afAuth.authState.subscribe(user => {
+    //   if (user) {
+    //     this.userStands = this.db.list(`stands/${this.userId}`);
+    //   }
+    // });
+    this.db.list(`stand-applications`)
+      .snapshotChanges()
+      .subscribe(data => {
+        data.forEach(location => {
+        console.log(location);
+        
+          // this.db.list(`stand-applications/${location}`, ref => ref.orderByChild('applicant')
+          //   .equalTo(this.userEmail))
+          //   .snapshotChanges()
+          //   .subscribe(result => {
+          //     this.userStands.push(result);
+          //     console.log(this.userStands);
+              
+          //   })
+        })
+      })
     return this.userStands;
   }
 
@@ -59,9 +79,10 @@ export class DataService {
         data.forEach(item => {
           standNumber.status = 'Owned';
           this.db.list(`stands/${item.key}`)
-         this.db.list(`stand-applications/${area}`).update(item.key, standNumber);
+          this.db.list(`stand-applications/${area}`).update(item.key, standNumber);
         })
       })
   }
 
+  paymentRequest() { }
 }

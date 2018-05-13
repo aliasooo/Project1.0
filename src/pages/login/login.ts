@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { User } from '../../models/user';
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -10,7 +10,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class LoginPage {
   user = {} as User;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private angularAuth: AngularFireAuth) {
+  constructor(public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, private angularAuth: AngularFireAuth) {
   }
 
   ionViewDidLoad() {
@@ -26,8 +26,15 @@ export class LoginPage {
       }
     }
     catch (e) {
-      console.error(e);
+      console.log(e);
 
+      let alert = this.alertCtrl.create({
+        title: 'Error!',
+        subTitle: 'Invalid credentials!',
+        buttons: ['OK']
+      });
+      alert.present();
+      this.navCtrl.push(LoginPage);
     }
   }
 

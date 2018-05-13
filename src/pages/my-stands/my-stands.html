@@ -18,9 +18,7 @@
 
   <ion-item *ngFor="let item of myStands">
     <ion-card>
-
-      <img src="../../assets/imgs/stand.jpg">
-
+      <img src="../../assets/imgs/stand.jpeg">
       <ion-item>
         <ion-icon name="pin" item-start large></ion-icon>
         <h2>{{item.area}}</h2>
@@ -33,6 +31,9 @@
           <ion-icon name="navigate"></ion-icon>
           Locate
         </button>
+      </ion-item>
+      <ion-item>
+        <button ion-button color="secondary" round (click)="buy(item.area)" *ngIf="item.status === 'Payment'">Make Payment</button>
       </ion-item>
 
     </ion-card>

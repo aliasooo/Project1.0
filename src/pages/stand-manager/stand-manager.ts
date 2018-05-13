@@ -68,7 +68,7 @@ export class StandManagerPage {
       })
   }
 
-  approve(applicant: string, ) {
+  assign(applicant: string, ) {
     let prompt = this.alertCtrl.create({
       title: 'Stand Approval',
       message: "Provide a stand number below",
@@ -93,29 +93,14 @@ export class StandManagerPage {
     prompt.present();
   }
 
-  paymentRequest(applicant: string, ) {
-    let prompt = this.alertCtrl.create({
-      title: 'Stand Approval',
-      message: "Provide a stand number below",
-      inputs: [
-        {
-          name: 'standNumber',
-          placeholder: 'Stand Number'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel'
-        },
-        {
-          text: 'Save',
-          handler: data => {
-            this.dataService.assignStandNumber(this.selectedArea, applicant, data);
-          }
-        }
-      ]
+  approve(applicant: string, ) {
+    this.dataService.paymentRequest(this.selectedArea, applicant);
+    let alert = this.alertCtrl.create({
+      title: 'Success!',
+      subTitle: 'Application approved. Awaiting payment',
+      buttons: ['OK']
     });
-    prompt.present();
+    alert.present();
   }
 
 }

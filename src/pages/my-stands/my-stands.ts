@@ -50,4 +50,7 @@ export class MyStandsPage {
     this.navCtrl.push(BillPaymentsPage);
   }
 
+  buy(area) {
+    this.dataService.makePayment(area)
+  }
 }

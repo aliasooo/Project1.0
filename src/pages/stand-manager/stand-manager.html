@@ -68,7 +68,7 @@
       <h2>{{applicant.applicant}}</h2>
       <p>{{applicant.status}}</p>
       <button ion-button clear item-end (click)="approve(applicant.applicant)" *ngIf="applicant.status === 'Pending Approval'">Approve</button>
-      <button ion-button clear item-end (click)="approve(applicant.applicant)" *ngIf="applicant.status === 'Pending'">Request Payment</button>
+      <button ion-button clear item-end (click)="assign(applicant.applicant)" *ngIf="applicant.status === 'Paid'">Assign</button>
 
     </ion-item>
   </ion-list>

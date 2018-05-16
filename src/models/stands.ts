@@ -5,4 +5,5 @@ export interface Stands {
   longitude: any;
   price: number;
   status: string;
+  standId: string;
 }

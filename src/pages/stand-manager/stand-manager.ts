@@ -23,11 +23,28 @@ export class StandManagerPage {
   isManage = false;
   applicants: any;
   selectedArea: string;
+  loading;
   constructor(public alertCtrl: AlertController, public loadingCtrl: LoadingController, private dataService: DataService, public navCtrl: NavController, public navParams: NavParams) {
     this.getStands()
   }
 
   ionViewDidLoad() {
+  }
+
+  showLoading() {
+    if (!this.loading) {
+      this.loading = this.loadingCtrl.create({
+        content: 'Please Wait...'
+      });
+      this.loading.present();
+    }
+  }
+
+  dismissLoading() {
+    if (this.loading) {
+      this.loading.dismiss();
+      this.loading = null;
+    }
   }
 
   addNew() {
@@ -61,9 +78,15 @@ export class StandManagerPage {
     this.isManage = true;
     this.isEdit = false;
     this.selectedArea = area;
+    this.showLoading();
+    console.log(area);
+
     this.dataService.getAreaApplicants(area)
       .valueChanges()
       .subscribe(data => {
+        console.log(data);
+
+        this.dismissLoading();
         this.applicants = data;
       })
   }
@@ -75,7 +98,8 @@ export class StandManagerPage {
       inputs: [
         {
           name: 'standNumber',
-          placeholder: 'Stand Number'
+          placeholder: 'Stand Number',
+          type: 'number'
         },
       ],
       buttons: [
@@ -84,8 +108,22 @@ export class StandManagerPage {
         },
         {
           text: 'Save',
-          handler: data => {
-            this.dataService.assignStandNumber(this.selectedArea, applicant, data);
+          handler: standNumber => {
+            let loading = this.loadingCtrl.create({
+              content: 'Please wait...'
+            });
+            loading.present();
+            this.dataService.assignStandNumber(this.selectedArea, applicant, standNumber)
+              .snapshotChanges()
+              .subscribe(data => {
+                data.forEach(item => {
+                  standNumber.status = 'Owned';
+                  this.dataService.updateStandNumber(this.selectedArea, applicant, standNumber)
+                    .then(res => {
+                      loading.dismiss();
+                    })
+                })
+              });
           }
         }
       ]
@@ -93,14 +131,19 @@ export class StandManagerPage {
     prompt.present();
   }
 
-  approve(applicant: string, ) {
-    this.dataService.paymentRequest(this.selectedArea, applicant);
-    let alert = this.alertCtrl.create({
-      title: 'Success!',
-      subTitle: 'Application approved. Awaiting payment',
-      buttons: ['OK']
-    });
-    alert.present();
+  approve(id: string) {
+    this.showLoading();
+    this.dataService.paymentRequest(this.selectedArea, id)
+      .then(() => {
+        this.dismissLoading();
+        let alert = this.alertCtrl.create({
+          title: 'Success!',
+          subTitle: 'Application approved. Awaiting payment',
+          buttons: ['OK']
+        });
+        alert.present();
+      })
+
   }
 
 }

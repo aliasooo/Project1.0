@@ -16,27 +16,30 @@
 <ion-content padding>
   <button ion-button full (click)="payBills()">Pay Bills</button>
 
-  <ion-item *ngFor="let item of myStands">
-    <ion-card>
-      <img src="../../assets/imgs/stand.jpeg">
-      <ion-item>
-        <ion-icon name="pin" item-start large></ion-icon>
-        <h2>{{item.area}}</h2>
-        <p>{{ item.city }}</p>
-      </ion-item>
+  <ng-container *ngIf="myStands.length > 0">
+    <ion-item *ngFor="let item of myStands">
+      <ion-card>
+        <img src="../../assets/imgs/stand.jpeg">
+        <ion-item>
+          <ion-icon name="pin" item-start large></ion-icon>
+          <h2>{{item.area}}</h2>
+          <p>{{ item.city }}</p>
+        </ion-item>
 
-      <ion-item>
-        <p item-left>{{ item.status }}</p>
-        <button ion-button icon-left clear item-end (click)="itemTapped($event, item)">
-          <ion-icon name="navigate"></ion-icon>
-          Locate
-        </button>
-      </ion-item>
-      <ion-item>
-        <button ion-button color="secondary" round (click)="buy(item.area)" *ngIf="item.status === 'Payment'">Make Payment</button>
-      </ion-item>
+        <ion-item>
+          <p item-left>{{ item.status }}</p>
+          <button ion-button icon-left clear item-end (click)="itemTapped($event, item)">
+            <ion-icon name="navigate"></ion-icon>
+            Locate
+          </button>
+        </ion-item>
+        <ion-item *ngIf="item.status === 'Payment'">
+          <button ion-button color="secondary" round (click)="buy(item.area, item.standId)">Make Payment</button>
+        </ion-item>
 
-    </ion-card>
-  </ion-item>
+      </ion-card>
+    </ion-item>
+
+  </ng-container>
 
 </ion-content>

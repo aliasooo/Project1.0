@@ -28,15 +28,25 @@ export class DataService {
     this.newStand = this.db.list(`new-stands`);
   }
 
-  getUserStands(): AngularFireList<Stands> {
-    return this.userStands;
+  getUserStands() {
+    return this.db.list(`stand-applications`);
+  }
+
+  standSearch(stand) {
+    return this.db.list(`stand-applications/${stand}`, ref => ref.orderByChild('applicant')
+      .equalTo(this.userEmail));
   }
 
   addStand(stand: Stands) {
     this.standApplications = this.db.list(`stand-applications/${stand.area}`);
-    this.standApplications.push({ applicant: this.userEmail, status: 'Pending Approval', standNumber: null });
-    stand.status = 'Pending Approval';
-    return this.userStands.push(stand);
+    let data = Object.assign(
+      stand, {
+        applicant: this.userEmail,
+        status: 'Pending Approval'
+      })
+    let key = this.standApplications.push(data).key;
+    stand.standId = key;
+    return this.db.list(`stand-applications/${stand.area}`).update(key, { standId: key });
   }
 
   newStands(newStand: Stands) {
@@ -51,57 +61,38 @@ export class DataService {
     return this.db.list(`stand-applications/${area}`);
   }
 
+  // stand number
   assignStandNumber(area: string, applicant: any, standNumber) {
-    this.db.list(`stand-applications/${area}`, ref => ref.orderByChild('applicant')
-      .equalTo(applicant))
-      .snapshotChanges()
-      .subscribe(data => {
-        data.forEach(item => {
-          standNumber.status = 'Owned';
-          this.db.list(`approved-stands/${item.key}`)
-          this.db.list(`stand-applications/${area}`).update(item.key, standNumber);
-        })
-      });
+    return this.db.list(`stand-applications/${area}`, ref => ref.orderByChild('applicant')
+      .equalTo(applicant));
+  }
+  updateStandNumber(area: string, item: any, standNumber) {
+    this.db.list(`approved-stands/${item.key}`)
+    return this.db.list(`stand-applications/${area}`).update(item.key, standNumber);
   }
 
-  paymentRequest(area: string, applicant: any) {
-    this.db.list(`stand-applications/${area}`, ref => ref.orderByChild('applicant')
-      .equalTo(applicant))
-      .snapshotChanges()
-      .subscribe(data => {
-        data.forEach(item => {
-          this.db.list(`stand-applications/${area}`).update(item.key, { status: 'Payment' });
-        })
-      });
+  //payment
 
-    this.db.list(`stands/${this.userId}`, ref => ref.orderByChild('area')
-      .equalTo(area))
-      .snapshotChanges()
-      .subscribe(data => {
-        data.forEach(item => {
-          this.db.list(`stands/${this.userId}`).update(item.key, { status: 'Payment' })
-        })
-      });
+  paymentRequest(area: string, id: string) {
+    return this.db.list(`stand-applications/${area}`).update(id, { status: 'Payment' });
   }
 
-  makePayment(area) {
-    this.db.list(`stands/${this.userId}`, ref => ref.orderByChild('area')
-      .equalTo(area))
-      .snapshotChanges()
-      .subscribe(data => {
-        data.forEach(item => {
-          this.db.list(`stands/${this.userId}`).update(item.key, { status: 'Paid' })
-        })
-      });
+  searchByArea(area) {
+    // this.db.list(`stand-applications/${area}`, ref => ref.orderByChild('applicant')
+    //   .equalTo(this.userEmail))
+    //   .snapshotChanges()
+    //   .subscribe(data => {
+    //     this.db.list(`stand-applications/${area}`).update(data[0].key, { status: 'Paid' });
+    //   })
+    return this.db.list(`stands/${this.userId}`, ref => ref.orderByChild('area')
+      .equalTo(area));
+  }
 
-    this.db.list(`stand-applications/${area}`, ref => ref.orderByChild('applicant')
-      .equalTo(this.userEmail))
-      .snapshotChanges()
-      .subscribe(data => {
-        data.forEach(item => {
-          this.db.list(`stand-applications/${area}`).update(item.key, { status: 'Paid' });
-        })
-      })
+  pay(stand) {
+    return this.db.list(`stands/${this.userId}`).update(stand.key, { status: 'Paid' });
+  }
 
+  makePayment(area, standId) {
+    return this.db.list(`stand-applications/${area}`).update(standId, { status: 'Paid' });
   }
 }

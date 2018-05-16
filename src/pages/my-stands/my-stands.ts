@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { DataService } from '../../services/data.service';
 import { StandDetailsPage } from '../stand-details/stand-details';
 import { BillPaymentsPage } from '../bill-payments/bill-payments';
@@ -10,9 +10,10 @@ import { BillPaymentsPage } from '../bill-payments/bill-payments';
   templateUrl: 'my-stands.html',
 })
 export class MyStandsPage {
-  myStands: any;
+  myStands = [];
+  loading;
 
-  constructor(public loadingCtrl: LoadingController, private dataService: DataService, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public alertCtrl: AlertController, public loadingCtrl: LoadingController, private dataService: DataService, public navCtrl: NavController, public navParams: NavParams) {
     this.getStands();
   }
 
@@ -20,23 +21,36 @@ export class MyStandsPage {
 
   }
 
+  showLoading() {
+    if (!this.loading) {
+      this.loading = this.loadingCtrl.create({
+        content: 'Please Wait...'
+      });
+      this.loading.present();
+    }
+  }
+
+  dismissLoading() {
+    if (this.loading) {
+      this.loading.dismiss();
+      this.loading = null;
+    }
+  }
+
+
   getStands() {
-    let loading = this.loadingCtrl.create({
-      content: 'Please wait...'
-    });
-    loading.present();
-
     this.dataService.getUserStands()
-      .valueChanges().
-      subscribe(data => {
-        this.myStands = data;
-        loading.dismiss();
-      },
-        err => {
-          loading.dismiss();
-          console.log(err);
-
-        })
+      .snapshotChanges()
+      .subscribe(data => {
+        data.forEach(stand => {
+          console.log(stand);
+          this.dataService.standSearch(stand.key)
+            .valueChanges()
+            .subscribe(res => {
+              this.myStands = this.myStands.concat(res);
+            });
+        });
+      })
 
   }
 
@@ -50,7 +64,17 @@ export class MyStandsPage {
     this.navCtrl.push(BillPaymentsPage);
   }
 
-  buy(area) {
-    this.dataService.makePayment(area)
+  buy(area, id) {
+    this.dataService.makePayment(area, id)
+      .then(() => {
+        this.dismissLoading();
+        let alert = this.alertCtrl.create({
+          title: 'Success!',
+          subTitle: 'Payment was successful',
+          buttons: ['OK']
+        });
+        alert.present();
+        this.navCtrl.push(MyStandsPage);
+      })
   }
 }

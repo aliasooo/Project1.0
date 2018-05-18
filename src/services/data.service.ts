@@ -17,15 +17,10 @@ export class DataService {
   constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth) {
     afAuth.authState.subscribe(user => {
       if (user) {
-        //add loader
         this.userEmail = user.email;
         this.userId = user.uid;
-        this.userStands = this.db.list(`stands/${this.userId}`);
-        console.log(this.userStands);
-
       }
     });
-    this.newStand = this.db.list(`new-stands`);
   }
 
   getUserStands() {
@@ -50,7 +45,7 @@ export class DataService {
   }
 
   newStands(newStand: Stands) {
-    this.newStand.push(newStand);
+    return this.db.list(`new-stands`).push(newStand);
   }
 
   getNewStandsAreas() {
@@ -62,28 +57,26 @@ export class DataService {
   }
 
   // stand number
-  assignStandNumber(area: string, applicant: any, standNumber) {
-    return this.db.list(`stand-applications/${area}`, ref => ref.orderByChild('applicant')
-      .equalTo(applicant));
-  }
-  updateStandNumber(area: string, item: any, standNumber) {
-    this.db.list(`approved-stands/${item.key}`)
-    return this.db.list(`stand-applications/${area}`).update(item.key, standNumber);
+  assignStandNumber(area: string, id: string, standNumber) {
+    let data = Object.assign(
+      standNumber, {
+        status: 'Owned'
+      })
+    return this.db.list(`stand-applications/${area}`).update(id, data);
   }
 
   //payment
+  chargeRates(area: string, id: string, bills) {
+    console.log(bills);
+
+    return this.db.list(`stand-applications/${area}`).update(id, bills);
+  }
 
   paymentRequest(area: string, id: string) {
     return this.db.list(`stand-applications/${area}`).update(id, { status: 'Payment' });
   }
 
   searchByArea(area) {
-    // this.db.list(`stand-applications/${area}`, ref => ref.orderByChild('applicant')
-    //   .equalTo(this.userEmail))
-    //   .snapshotChanges()
-    //   .subscribe(data => {
-    //     this.db.list(`stand-applications/${area}`).update(data[0].key, { status: 'Paid' });
-    //   })
     return this.db.list(`stands/${this.userId}`, ref => ref.orderByChild('area')
       .equalTo(area));
   }

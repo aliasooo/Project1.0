@@ -48,14 +48,16 @@ export class StandManagerPage {
   }
 
   addNew() {
+    this.showLoading();
     this.dataService.newStands(this.newStand)
-    let loading = this.loadingCtrl.create({
-      content: 'Please wait...',
-      duration: 2000
-    });
-    loading.present();
-    this.isEdit = false;
-    this.isManage = false;
+      .then(() => {
+        this.dismissLoading();
+        let alert = this.alertCtrl.create({
+          title: 'Success!',
+          buttons: ['OK']
+        });
+        alert.present();
+      });
   }
 
   getStands() {
@@ -91,7 +93,7 @@ export class StandManagerPage {
       })
   }
 
-  assign(applicant: string, ) {
+  assign(standId) {
     let prompt = this.alertCtrl.create({
       title: 'Stand Approval',
       message: "Provide a stand number below",
@@ -109,27 +111,68 @@ export class StandManagerPage {
         {
           text: 'Save',
           handler: standNumber => {
-            let loading = this.loadingCtrl.create({
-              content: 'Please wait...'
-            });
-            loading.present();
-            this.dataService.assignStandNumber(this.selectedArea, applicant, standNumber)
-              .snapshotChanges()
-              .subscribe(data => {
-                data.forEach(item => {
-                  standNumber.status = 'Owned';
-                  this.dataService.updateStandNumber(this.selectedArea, applicant, standNumber)
-                    .then(res => {
-                      loading.dismiss();
-                    })
-                })
-              });
+            this.showLoading();
+            console.log(this.selectedArea, standId, standNumber);
+            this.dataService.assignStandNumber(this.selectedArea, standId, standNumber)
+              .then(() => {
+                this.dismissLoading();
+                let alert = this.alertCtrl.create({
+                  title: 'Success!',
+                  buttons: ['OK']
+                });
+                alert.present();
+              })
           }
         }
       ]
     });
     prompt.present();
   }
+
+  charge(standId) {
+    let prompt = this.alertCtrl.create({
+      title: 'Rates charges',
+      inputs: [
+        {
+          name: 'Waste',
+          placeholder: 'Waste charge',
+          type: 'number'
+        },
+        {
+          name: 'Bins',
+          placeholder: 'Bin charge',
+          type: 'number'
+        },
+        {
+          name: 'Water',
+          value: 'Water charge',
+          type: 'number'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel'
+        },
+        {
+          text: 'Save',
+          handler: bills => {
+            this.showLoading();
+            this.dataService.chargeRates(this.selectedArea, standId, bills)
+              .then(() => {
+                this.dismissLoading();
+                let alert = this.alertCtrl.create({
+                  title: 'Success!',
+                  buttons: ['OK']
+                });
+                alert.present();
+              })
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+
 
   approve(id: string) {
     this.showLoading();

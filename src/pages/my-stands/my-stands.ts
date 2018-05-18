@@ -43,7 +43,6 @@ export class MyStandsPage {
       .snapshotChanges()
       .subscribe(data => {
         data.forEach(stand => {
-          console.log(stand);
           this.dataService.standSearch(stand.key)
             .valueChanges()
             .subscribe(res => {
@@ -65,15 +64,11 @@ export class MyStandsPage {
   }
 
   buy(area, id) {
+    this.showLoading();
     this.dataService.makePayment(area, id)
       .then(() => {
         this.dismissLoading();
-        let alert = this.alertCtrl.create({
-          title: 'Success!',
-          subTitle: 'Payment was successful',
-          buttons: ['OK']
-        });
-        alert.present();
+        this.navCtrl.popToRoot();
         this.navCtrl.push(MyStandsPage);
       })
   }

@@ -67,8 +67,6 @@ export class DataService {
 
   //payment
   chargeRates(area: string, id: string, bills) {
-    console.log(bills);
-
     return this.db.list(`stand-applications/${area}`).update(id, bills);
   }
 
@@ -87,5 +85,10 @@ export class DataService {
 
   makePayment(area, standId) {
     return this.db.list(`stand-applications/${area}`).update(standId, { status: 'Paid' });
+  }
+
+  //bills
+  payBills(area, standId) {
+    return this.db.list(`stand-applications/${area}`).update(standId, { Bins: 0, Water: 0, Waste: 0 });
   }
 }

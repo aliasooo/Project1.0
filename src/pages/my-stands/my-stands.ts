@@ -39,6 +39,7 @@ export class MyStandsPage {
 
 
   getStands() {
+    this.showLoading();
     this.dataService.getUserStands()
       .snapshotChanges()
       .subscribe(data => {
@@ -47,6 +48,7 @@ export class MyStandsPage {
             .valueChanges()
             .subscribe(res => {
               this.myStands = this.myStands.concat(res);
+              this.dismissLoading();
             });
         });
       })

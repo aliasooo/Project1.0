@@ -134,6 +134,11 @@ export class StandManagerPage {
       title: 'Rates charges',
       inputs: [
         {
+          name: 'Water',
+          placeholder: 'Water charge',
+          type: 'number'
+        },
+        {
           name: 'Waste',
           placeholder: 'Waste charge',
           type: 'number'
@@ -142,12 +147,8 @@ export class StandManagerPage {
           name: 'Bins',
           placeholder: 'Bin charge',
           type: 'number'
-        },
-        {
-          name: 'Water',
-          value: 'Water charge',
-          type: 'number'
-        },
+        }
+
       ],
       buttons: [
         {

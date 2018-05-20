@@ -12,13 +12,13 @@
     <ion-card-header>
       <span>
         <h3>Balance
-<ion-icon name="more" class="f-r" (click)="tasks()"></ion-icon>
+          <ion-icon name="more" class="f-r" (click)="tasks()"></ion-icon>
 
         </h3>
       </span>
     </ion-card-header>
     <ion-card-content class="content-center">
-      $0.00
+      {{binBalance + wasteBalance + waterBalance|currency}}
     </ion-card-content>
   </ion-card>
 
@@ -27,19 +27,19 @@
     <ion-card-content>
       <span class="bills">
         <h3>Bin Collection
-          <p class="f-r">$0.00</p>
+          <p class="f-r">{{binBalance | currency}}</p>
         </h3>
       </span>
       <span class="bills">
 
         <h3>Waste Management
-          <p class="f-r">$0.00</p>
+          <p class="f-r">{{wasteBalance | currency}}</p>
         </h3>
       </span>
       <span class="bills">
 
         <h3>Rates
-          <p class="f-r">$0.00</p>
+          <p class="f-r">{{waterBalance | currency}}</p>
         </h3>
       </span>
 

@@ -17,7 +17,7 @@ import { Stands } from '../../models/stands';
 })
 export class StandManagerPage {
   area: any;
-  newStand = {} as Stands;
+  newStand = {} as any;
   availableStands: any;
   isEdit = false;
   isManage = false;

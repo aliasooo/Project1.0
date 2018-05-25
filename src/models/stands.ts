@@ -6,4 +6,5 @@ export interface Stands {
   price: number;
   status: string;
   standId: string;
+  description: string;
 }

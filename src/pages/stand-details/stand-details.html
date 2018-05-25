@@ -10,6 +10,12 @@
       <b style="font-size: 1.2em">{{stand.price| currency}} </b>
     </p>
     <p>Location : {{stand.city}}</p>
+    <p>
+      <b>Description</b>:</p>
+    <p>{{stand.description}}</p>
+    <p>
+      <b>Details</b>:</p>
+    <p>{{stand.details}}</p>
     <button ion-button block (click)="onSubmit()" *ngIf="!stand.status">Apply</button>
     <div #map id="map"></div>
   </ion-card>

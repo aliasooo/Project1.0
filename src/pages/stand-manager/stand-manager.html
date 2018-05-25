@@ -34,8 +34,6 @@
 
 <ion-content padding *ngIf="isEdit">
   <ion-item>
-    <ion-label fixed>City</ion-label>
-    <ion-input type="text" [(ngModel)]="newStand.city"></ion-input>
   </ion-item>
 
   <ion-item>
@@ -45,6 +43,10 @@
   <ion-item>
     <ion-label floating>Area</ion-label>
     <ion-input type="text" [(ngModel)]="newStand.area"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Stand Number</ion-label>
+    <ion-input type="text" [(ngModel)]="newStand.standNumber"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label floating>Price</ion-label>
@@ -57,6 +59,14 @@
   <ion-item>
     <ion-label floating>Latitude</ion-label>
     <ion-input type="text" [(ngModel)]="newStand.latitude"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Description</ion-label>
+    <ion-input type="text" [(ngModel)]="newStand.description"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Details</ion-label>
+    <ion-input type="text" [(ngModel)]="newStand.details"></ion-input>
   </ion-item>
 
   <button ion-button margin-top (click)="addNew()" color="dark-blue">Add</button>

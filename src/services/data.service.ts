@@ -2,9 +2,7 @@ import { Injectable } from "@angular/core";
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
 import { AngularFireAuth } from "angularfire2/auth";
 import { Stands } from "../models/stands";
-import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
-import { database } from "firebase";
-
+import { User } from "../models/user";
 
 @Injectable()
 export class DataService {
@@ -23,12 +21,16 @@ export class DataService {
     });
   }
 
+  login(user: User) {
+    return this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password);
+  }
+
   getUserStands() {
     return this.db.list(`stand-applications`);
   }
 
   standSearch(stand) {
-    return this.db.list(`stand-applications/${stand}`, ref => ref.orderByChild('applicant')
+    return this.db.list<any>(`stand-applications/${stand}`, ref => ref.orderByChild('applicant')
       .equalTo(this.userEmail));
   }
 

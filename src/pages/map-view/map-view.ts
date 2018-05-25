@@ -10,6 +10,7 @@ declare var google;
   templateUrl: 'map-view.html',
 })
 export class MapViewPage {
+  locations: any;
   @ViewChild('map') mapContainer: ElementRef;
   map: any;
   standList = [];
@@ -47,4 +48,13 @@ export class MapViewPage {
     standMarker.setMap(this.map);
   }
 
+  // addCluster() {
+
+  //   this.map.addMarkerCluster({
+  //     markers: this.locations,
+  //     icons: [
+  //       { min: 2, max: 100, url: "../../assets/icon/m1.png", anchor: { x: 16, y: 16 } }
+  //     ]
+  //   })
+  // }
 }

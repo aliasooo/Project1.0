@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
-import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { StandDetailsPage } from '../stand-details/stand-details';
 import { MapViewPage } from '../map-view/map-view';
@@ -16,7 +15,7 @@ export class AvailableStandsPage {
   filteredStands = [];
   isFiltered = false;
 
-  constructor(public loadingCtrl: LoadingController, private dataService: DataService, public navCtrl: NavController, public navParams: NavParams, private http: HttpClient) {
+  constructor(public loadingCtrl: LoadingController, private dataService: DataService, public navCtrl: NavController, public navParams: NavParams) {
     this.getAllStands();
   }
 

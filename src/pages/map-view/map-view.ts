@@ -47,14 +47,4 @@ export class MapViewPage {
     var standMarker = new google.maps.Marker({ position: position, title: stand.area });
     standMarker.setMap(this.map);
   }
-
-  // addCluster() {
-
-  //   this.map.addMarkerCluster({
-  //     markers: this.locations,
-  //     icons: [
-  //       { min: 2, max: 100, url: "../../assets/icon/m1.png", anchor: { x: 16, y: 16 } }
-  //     ]
-  //   })
-  // }
 }

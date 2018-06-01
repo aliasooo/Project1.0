@@ -34,7 +34,7 @@
           </button>
         </ion-item>
         <ion-item *ngIf="item.status === 'Payment'">
-          <button ion-button color="secondary" round (click)="buy(item.area, item.standId)">Make Payment</button>
+          <button ion-button color="secondary" round (click)="buy(item.area, item)">Make Payment</button>
         </ion-item>
 
       </ion-card>

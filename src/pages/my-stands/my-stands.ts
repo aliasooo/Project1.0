@@ -10,6 +10,8 @@ import { BillPaymentsPage } from '../bill-payments/bill-payments';
   templateUrl: 'my-stands.html',
 })
 export class MyStandsPage {
+  testRadioResult: any;
+  testRadioOpen: boolean;
   myStands = [];
   loading;
 
@@ -65,13 +67,38 @@ export class MyStandsPage {
     this.navCtrl.push(BillPaymentsPage);
   }
 
-  buy(area, id) {
+  buy(area, stand) {
     this.showLoading();
-    this.dataService.makePayment(area, id)
-      .then(() => {
-        this.dismissLoading();
-        this.navCtrl.popToRoot();
-        this.navCtrl.push(MyStandsPage);
-      })
+
+    let alert = this.alertCtrl.create();
+    alert.setTitle('Choose payment method');
+
+    alert.addInput({
+      type: 'radio',
+      label: 'Ecocash',
+      value: 'ecocash',
+      checked: false
+    });
+    alert.addInput({
+      type: 'radio',
+      label: 'Telecash',
+      value: 'telecash',
+      checked: false
+    });
+
+    alert.addButton('Cancel');
+    alert.addButton({
+      text: 'Pay',
+      handler: data => {
+        this.dataService.makePayment(area, stand)
+          .then(() => {
+            this.dismissLoading();
+            this.navCtrl.popToRoot();
+            this.navCtrl.push(MyStandsPage);
+          });
+      }
+    });
+    alert.present();
+
   }
 }

@@ -6,6 +6,7 @@ import { User } from "../models/user";
 
 @Injectable()
 export class DataService {
+  unassignedStand: any;
   userStands: AngularFireList<any>;
   newStand: AngularFireList<Stands>;
   standApplications: AngularFireList<any>;
@@ -47,7 +48,9 @@ export class DataService {
   }
 
   newStands(newStand: Stands) {
-    return this.db.list(`new-stands`).push(newStand);
+    this.unassignedStand = this.db.list(`new-stands`);
+    let ref = this.unassignedStand.push(newStand).key;
+    return this.db.list(`new-stands`).update(ref, { standRef: ref });
   }
 
   getNewStandsAreas() {
@@ -85,8 +88,9 @@ export class DataService {
     return this.db.list(`stands/${this.userId}`).update(stand.key, { status: 'Paid' });
   }
 
-  makePayment(area, standId) {
-    return this.db.list(`stand-applications/${area}`).update(standId, { status: 'Paid' });
+  makePayment(area, stand) {
+    this.db.list(`new-stands`).remove(stand.standRef);
+    return this.db.list(`stand-applications/${area}`).update(stand.standId, { status: 'Owned' });
   }
 
   //bills

@@ -15,7 +15,7 @@ declare var google;
 export class StandDetailsPage {
   @ViewChild('map') mapContainer: ElementRef;
   public map: any;
-  stand = {} as Stands;
+  stand = {} as any;
 
   constructor(public alertCtrl: AlertController, private dataService: DataService, public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation) {
     this.stand = navParams.get('stand');

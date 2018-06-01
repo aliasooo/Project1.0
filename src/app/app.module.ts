@@ -22,6 +22,7 @@ import { DataService } from '../services/data.service';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { MyStandsPage } from '../pages/my-stands/my-stands';
 import { StandManagerPage } from '../pages/stand-manager/stand-manager';
+import { GoogleMaps } from "@ionic-native/google-maps";
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { StandManagerPage } from '../pages/stand-manager/stand-manager';
     StatusBar,
     SplashScreen,
     Geolocation,
+    GoogleMaps,
     CurrencyPipe,
     DataService,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
